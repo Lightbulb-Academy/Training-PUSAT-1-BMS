@@ -7,6 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Course {
+  bit
+  bca
+}
+
+enum Semester {
+  first
+  second
+  third
+  fourth
+  fifth
+  sixth
+  seventh
+  eighth
+}
+
 model Book {
   @@map("books")
 
@@ -15,6 +31,18 @@ model Book {
   isbn String
   year Int
   is_available Boolean @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+}
+
+model User {
+  @@map("users")
+
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  course Course
+  semester Semester
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 }
